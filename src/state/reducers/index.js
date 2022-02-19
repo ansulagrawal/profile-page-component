@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import handleUpdateReducer from './handleUpdateReducer';
 
-const reducer = combineReducers({
+const reducers = combineReducers({
    user: handleUpdateReducer,
 });
 
-export default reducer;
+export default reducers;

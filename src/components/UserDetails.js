@@ -13,8 +13,8 @@ export class UserDetails extends Component {
       });
    };
 
-   update(name, val) {
-      actions.updateInput(name, val);
+   update(name, value) {
+      actions.updateInput(name, value);
       console.log(this.props.user);
    }
    render() {
@@ -136,7 +136,7 @@ const mapStateToProps = (state) => ({
    user: state.user,
 });
 const mapDispatchToProps = (dispatch) => ({
-   actions: (name, val) => dispatch(actions.updateInput(name, val)),
+   actions: (name, value) => dispatch(actions.updateInput(name, value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserDetails);
