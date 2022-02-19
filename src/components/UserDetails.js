@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import EdiText from 'react-editext';
+import { connect } from 'react-redux';
 import './UserDetails.css';
+import { actions } from '../state/index';
 
 export class UserDetails extends Component {
    onSelect = (e) => {
@@ -10,8 +12,13 @@ export class UserDetails extends Component {
          gender: e.target.value,
       });
    };
+
+   update(name, val) {
+      actions.updateInput(name, val);
+      console.log(this.props.user);
+   }
    render() {
-      let { userdata, setUserdata } = this.props;
+      let { user } = this.props;
       return (
          <div className='user-profile-details'>
             <div className='d-flex flex-column wrapper'>
@@ -24,9 +31,9 @@ export class UserDetails extends Component {
 
                      <EdiText
                         type='text'
-                        value={userdata.fname}
-                        onSave={(v) => {
-                           setUserdata('fname', v);
+                        value={user.fname}
+                        onSave={(val) => {
+                           this.update('fname', val);
                         }}
                      />
                   </div>
@@ -34,29 +41,21 @@ export class UserDetails extends Component {
                      <label className='labels'>Email</label>
                      <EdiText
                         type='text'
-                        value={userdata.email}
+                        value={user.email}
                         onSave={(v) => {
-                           setUserdata('email', v);
+                           this.update('email', v);
                         }}
                      />
                   </div>
                </div>
                <div className='row mt-3'>
-                  {/* <div className='col-md-6'>
-                     <label className='labels'>Gender</label>
-                     <select name='gender' id='gender' onSelect={this.onSelect}>
-                        <option value='Male'>Male</option>
-                        <option value='Fmale'>Female</option>
-                        <option value='Other'>Other</option>
-                     </select>
-                  </div> */}
                   <div className='col-md-12'>
                      <label className='labels'>Address</label>
                      <EdiText
                         type='text'
-                        value={userdata.address}
+                        value={user.address}
                         onSave={(v) => {
-                           setUserdata('address', v);
+                           this.update('address', v);
                         }}
                      />
                   </div>
@@ -66,9 +65,9 @@ export class UserDetails extends Component {
                      <label className='labels'>City</label>
                      <EdiText
                         type='text'
-                        value={userdata.city}
+                        value={user.city}
                         onSave={(v) => {
-                           setUserdata('city', v);
+                           this.update('city', v);
                         }}
                      />
                   </div>
@@ -76,9 +75,9 @@ export class UserDetails extends Component {
                      <label className='labels'>State</label>
                      <EdiText
                         type='text'
-                        value={userdata.state}
+                        value={user.state}
                         onSave={(v) => {
-                           setUserdata('state', v);
+                           this.update('state', v);
                         }}
                      />
                   </div>
@@ -88,9 +87,9 @@ export class UserDetails extends Component {
                      <label className='labels'>Country</label>
                      <EdiText
                         type='text'
-                        value={userdata.country}
+                        value={user.country}
                         onSave={(v) => {
-                           setUserdata('country', v);
+                           this.update('country', v);
                         }}
                      />
                   </div>
@@ -98,9 +97,9 @@ export class UserDetails extends Component {
                      <label className='labels'>Postal Code</label>
                      <EdiText
                         type='text'
-                        value={userdata.postalcode}
+                        value={user.postalcode}
                         onSave={(v) => {
-                           setUserdata('postalcode', v);
+                           this.update('postalcode', v);
                         }}
                      />
                   </div>
@@ -110,9 +109,9 @@ export class UserDetails extends Component {
                      <label className='labels'>Mobile No</label>
                      <EdiText
                         type='text'
-                        value={userdata.mobile}
+                        value={user.mobile}
                         onSave={(v) => {
-                           setUserdata('mobile', v);
+                           this.update('mobile', v);
                         }}
                      />
                   </div>
@@ -120,9 +119,9 @@ export class UserDetails extends Component {
                      <label className='labels'>Intrest</label>
                      <EdiText
                         type='text'
-                        value={userdata.intrest}
+                        value={user.intrest}
                         onSave={(v) => {
-                           setUserdata('intrest', v);
+                           this.update('intrest', v);
                         }}
                      />
                   </div>
@@ -133,4 +132,11 @@ export class UserDetails extends Component {
    }
 }
 
-export default UserDetails;
+const mapStateToProps = (state) => ({
+   user: state.user,
+});
+const mapDispatchToProps = (dispatch) => ({
+   actions: (name, val) => dispatch(actions.updateInput(name, val)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserDetails);
