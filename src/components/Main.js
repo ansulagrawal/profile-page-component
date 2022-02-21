@@ -8,13 +8,14 @@ export class Main extends Component {
       this.state = {
          userdata: {
             fname: 'Ansul Agrawal',
-            email: 'ansul@gmail.com',
+            email: 'ansul9@gmail.com',
+            dob: new Date().toISOString().substr(0, 10),
             address: 'Kabilpore',
             city: 'Navsari',
             state: 'Gujarat',
             country: 'India',
-            postalcode: '396427',
-            mobile: '8866776740',
+            postalcode: 396427,
+            mobile: 8866776740,
             intrest: 'Study, Travel, Read',
          },
       };
@@ -26,14 +27,12 @@ export class Main extends Component {
       });
    };
    render() {
-      console.log(this.state.userdata);
+      const { userdata } = this.state;
       return (
          <>
             <Navbar />
-            <Profile
-               userdata={this.state.userdata}
-               setUserdata={this.setUserdata}
-            />
+            {console.log(userdata)}
+            <Profile userdata={userdata} setUserdata={this.setUserdata} />
          </>
       );
    }

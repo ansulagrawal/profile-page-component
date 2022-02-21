@@ -1,8 +1,22 @@
 import React, { Component } from 'react';
 import EdiText from 'react-editext';
 import './UserDetails.css';
-
 export class UserDetails extends Component {
+   // Validation
+   validationhandler = (name, value) => {
+      switch (name) {
+         case 'email':
+            let temp = new RegExp(
+               /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g
+            ).test(value);
+            return temp;
+         case 'fname':
+            return value.length > 10;
+         default:
+            return false;
+      }
+   };
+
    onSelect = (e) => {
       e.preventDefault();
       this.props.setUserdata({
@@ -10,8 +24,10 @@ export class UserDetails extends Component {
          gender: e.target.value,
       });
    };
+
    render() {
       let { userdata, setUserdata } = this.props;
+
       return (
          <div className='user-profile-details'>
             <div className='d-flex flex-column wrapper'>
@@ -21,42 +37,51 @@ export class UserDetails extends Component {
                <div className='row mt-3'>
                   <div className='col-md-6'>
                      <label className='labels'>Full Name</label>
-
                      <EdiText
                         type='text'
                         value={userdata.fname}
-                        onSave={(v) => {
-                           setUserdata('fname', v);
+                        onSave={(val) => {
+                           setUserdata('fname', val);
                         }}
+                        validation={(val) => {
+                           return this.validationhandler('fname', val);
+                        }}
+                        validationMessage='Please enter valid name with length greater than 10'
                      />
                   </div>
                   <div className='col-md-6'>
                      <label className='labels'>Email</label>
                      <EdiText
-                        type='text'
+                        type='email'
+                        validationMessage='Please enter a valid email address'
+                        validation={(value) => {
+                           return this.validationhandler('email', value);
+                        }}
                         value={userdata.email}
-                        onSave={(v) => {
-                           setUserdata('email', v);
+                        onSave={(val) => {
+                           setUserdata('email', val);
                         }}
                      />
                   </div>
                </div>
                <div className='row mt-3'>
-                  {/* <div className='col-md-6'>
-                     <label className='labels'>Gender</label>
-                     <select name='gender' id='gender' onSelect={this.onSelect}>
-                        <option value='Male'>Male</option>
-                        <option value='Fmale'>Female</option>
-                        <option value='Other'>Other</option>
-                     </select>
-                  </div> */}
-                  <div className='col-md-12'>
+                  <div className='col-md-6'>
+                     <label className='labels'>Date of Birth</label>
+                     <EdiText
+                        type='date'
+                        value={userdata.dob}
+                        onSave={(val) => {
+                           setUserdata('dob', val);
+                        }}
+                     />
+                  </div>
+                  <div className='col-md-6'>
                      <label className='labels'>Address</label>
                      <EdiText
                         type='text'
                         value={userdata.address}
-                        onSave={(v) => {
-                           setUserdata('address', v);
+                        onSave={(val) => {
+                           setUserdata('address', val);
                         }}
                      />
                   </div>
@@ -67,8 +92,8 @@ export class UserDetails extends Component {
                      <EdiText
                         type='text'
                         value={userdata.city}
-                        onSave={(v) => {
-                           setUserdata('city', v);
+                        onSave={(val) => {
+                           setUserdata('city', val);
                         }}
                      />
                   </div>
@@ -77,8 +102,8 @@ export class UserDetails extends Component {
                      <EdiText
                         type='text'
                         value={userdata.state}
-                        onSave={(v) => {
-                           setUserdata('state', v);
+                        onSave={(val) => {
+                           setUserdata('state', val);
                         }}
                      />
                   </div>
@@ -89,8 +114,8 @@ export class UserDetails extends Component {
                      <EdiText
                         type='text'
                         value={userdata.country}
-                        onSave={(v) => {
-                           setUserdata('country', v);
+                        onSave={(val) => {
+                           setUserdata('country', val);
                         }}
                      />
                   </div>
@@ -99,8 +124,8 @@ export class UserDetails extends Component {
                      <EdiText
                         type='text'
                         value={userdata.postalcode}
-                        onSave={(v) => {
-                           setUserdata('postalcode', v);
+                        onSave={(val) => {
+                           setUserdata('postalcode', val);
                         }}
                      />
                   </div>
@@ -111,8 +136,8 @@ export class UserDetails extends Component {
                      <EdiText
                         type='text'
                         value={userdata.mobile}
-                        onSave={(v) => {
-                           setUserdata('mobile', v);
+                        onSave={(val) => {
+                           setUserdata('mobile', val);
                         }}
                      />
                   </div>
@@ -121,8 +146,8 @@ export class UserDetails extends Component {
                      <EdiText
                         type='text'
                         value={userdata.intrest}
-                        onSave={(v) => {
-                           setUserdata('intrest', v);
+                        onSave={(val) => {
+                           setUserdata('intrest', val);
                         }}
                      />
                   </div>
