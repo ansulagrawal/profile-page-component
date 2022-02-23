@@ -13,10 +13,6 @@ export class UserDetails extends Component {
       });
    };
 
-   update(name, value) {
-      actions.updateInput(name, value);
-      console.log(this.props.user);
-   }
    render() {
       let { user } = this.props;
       return (
@@ -33,7 +29,7 @@ export class UserDetails extends Component {
                         type='text'
                         value={user.fname}
                         onSave={(val) => {
-                           this.update('fname', val);
+                           this.props.updateInput('fname', val);
                         }}
                      />
                   </div>
@@ -43,7 +39,7 @@ export class UserDetails extends Component {
                         type='text'
                         value={user.email}
                         onSave={(v) => {
-                           this.update('email', v);
+                           this.props.updateInput('email', v);
                         }}
                      />
                   </div>
@@ -55,7 +51,7 @@ export class UserDetails extends Component {
                         type='text'
                         value={user.address}
                         onSave={(v) => {
-                           this.update('address', v);
+                           this.props.updateInput('address', v);
                         }}
                      />
                   </div>
@@ -67,7 +63,7 @@ export class UserDetails extends Component {
                         type='text'
                         value={user.city}
                         onSave={(v) => {
-                           this.update('city', v);
+                           this.props.updateInput('city', v);
                         }}
                      />
                   </div>
@@ -77,7 +73,7 @@ export class UserDetails extends Component {
                         type='text'
                         value={user.state}
                         onSave={(v) => {
-                           this.update('state', v);
+                           this.props.updateInput('state', v);
                         }}
                      />
                   </div>
@@ -89,7 +85,7 @@ export class UserDetails extends Component {
                         type='text'
                         value={user.country}
                         onSave={(v) => {
-                           this.update('country', v);
+                           this.props.updateInput('country', v);
                         }}
                      />
                   </div>
@@ -99,7 +95,7 @@ export class UserDetails extends Component {
                         type='text'
                         value={user.postalcode}
                         onSave={(v) => {
-                           this.update('postalcode', v);
+                           this.props.updateInput('postalcode', v);
                         }}
                      />
                   </div>
@@ -111,7 +107,7 @@ export class UserDetails extends Component {
                         type='text'
                         value={user.mobile}
                         onSave={(v) => {
-                           this.update('mobile', v);
+                           this.props.updateInput('mobile', v);
                         }}
                      />
                   </div>
@@ -121,7 +117,7 @@ export class UserDetails extends Component {
                         type='text'
                         value={user.intrest}
                         onSave={(v) => {
-                           this.update('intrest', v);
+                           this.props.updateInput('intrest', v);
                         }}
                      />
                   </div>
@@ -135,8 +131,8 @@ export class UserDetails extends Component {
 const mapStateToProps = (state) => ({
    user: state.user,
 });
-const mapDispatchToProps = (dispatch) => ({
-   actions: (name, value) => dispatch(actions.updateInput(name, value)),
-});
+const mapDispatchToProps = {
+   updateInput: actions.updateInput,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserDetails);

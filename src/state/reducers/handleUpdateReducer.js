@@ -12,11 +12,12 @@ const initialState = {
 };
 
 function handleUpdateReducer(state = initialState, action) {
-   console.log('handleUpdateReducer', action.value);
-   console.log('state', state);
    switch (action.type) {
       case 'UPDATE_INPUT':
-         return { ...state, [action.paylod.name]: action.paylod.value };
+         return {
+            ...state,
+            [action.payload.name]: action.payload.value,
+         };
       default:
          return state;
    }
